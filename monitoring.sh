@@ -26,7 +26,7 @@ echo "${BLUE}CPU Physical: ${END}${GREEN}$(lscpu | grep 'Processeur' | cut -c42-
 
 echo "${BLUE}vCPU:${END}${GREEN}$(grep processor /proc/cpuinfo | sed 's#processor##g' | cut -c3-)${END}"
 
-echo "${BLUE}Memory Usage: ${END}${GREEN}$(echo "($RAM_TOTAL-($RAM_TOTAL-$RAM_AVAILABLE))"|bc) Mo/$RAM_TOTAL Mo $(echo "(100 *$RAM_LEFT/$RAM_TOTAL)"|bc)% ${END}"
+echo "${BLUE}Memory Usage: ${END}${GREEN}$(echo "($RAM_TOTAL-($RAM_TOTAL-$RAM_LEFT))"|bc) Mo/$RAM_TOTAL Mo $(echo "(100 *$RAM_LEFT/$RAM_TOTAL)"|bc)% ${END}"
 
 echo "${BLUE}Disk Usage:${END}${GREEN} $TOTAL_DISK_GIGA Go/$FREE_DISK_GIGA Go ($PERCENT_GIGA%)${END}" 
 
@@ -64,6 +64,7 @@ fi
 echo "${BLUE}MAC Address of the current internet connection(s):${END}  ${GREEN}$(ifconfig | grep ether |cut -c15- | awk '{print $1}')${END}"
 
 echo "${BLUE}Sudo : ${END}${GREEN}$(cat /var/log/sudo/sudo.log | grep COMMAND | awk '{print NR}' | awk 'END { print }') cmd${END}"
+rm giga.tmp
 
 
 
