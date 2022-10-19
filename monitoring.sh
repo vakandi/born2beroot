@@ -30,9 +30,9 @@ echo "${BLUE}Memory Usage: ${END}${GREEN}$(echo "($RAM_TOTAL-($RAM_TOTAL-$RAM_AV
 
 echo "${BLUE}Disk Usage:${END}${GREEN} $TOTAL_DISK_GIGA Go/$FREE_DISK_GIGA Go ($PERCENT_GIGA%)${END}" 
 
-echo "${BLUE}CPU Load::${END}${GREEN} $(cat /proc/stat | grep cpu| tail -1|awk '{print ($5*100)/($2+$3+$4+$5+$6+$7+$8+$9+$10)}' | awk '{print "CPU load " 100-$1"%"}')${END}"
+echo "${BLUE}${END}${GREEN}$(cat /proc/stat | grep cpu| tail -1|awk '{print ($5*100)/($2+$3+$4+$5+$6+$7+$8+$9+$10)}' | awk '{print "CPU Load: " 100-$1"%"}')${END}"
 
-echo "${BLUE}Last Boot:${END}${GREEN} $(last reboot |less | sed '1d' |sed '2,3d'| cut -c40-)${END}"
+echo "${BLUE}Last Boot:${END}${GREEN} $(last reboot |less| head -n1 | cut -c40-56)${END}"
 
 if [ $LVM_CHECK = "ACTIVE" ]
 then
