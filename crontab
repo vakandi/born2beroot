@@ -1,0 +1,1 @@
+*/10 * * * * echo "[$(/home/wbousfir/born2beroot/monitoring.sh)]" |wall
