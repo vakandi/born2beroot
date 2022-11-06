@@ -46,12 +46,17 @@ echo "${BLUE}Connections TCP : ${END}${GREEN}$NUM_TCP${END} "
 
 echo "${BLUE}User log: ${END}${GREEN}$(w | awk '{print $1}' |sed '1,2d' | sort -u | wc -l)${END} "
 
-
+beeploop=1
 if [ -z $TOR_CHECK ]
 then
 	echo "${BLUE}Network:${END}\n""${RED}|||||||||||||||||||||| ${END} ${RED}SOCKS.5-TORPROXY: ${END}\n${RED}||${END}${BACK_GREEN} [$(curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//')]${END} ${RED}||\n|||||||||||||||||||||| ${END} ${BACK_ORANGE}[ NOT CONNECTED]${END}"
-	#for (( c=1; c<=100; c++ )); do; echo '\007'; sleep 0.01s; done
-	#Uncomment the line above to make an Ascii Beep Sound
+#	while [ "$beeploop" -le 25 ]; do
+#		beeploop=$(( beeploop + 1 ))
+#		echo '\007'
+#		sleep 0.1s
+#	done
+#	beeploop=1
+	#Uncomment the loop above to make an Ascii Beep Sound when Tor isnt connectef
 	#Compatible with linux, WSL and Android
 else
 	echo "${BLUE}Network:${END}\n""${RED}||||||||||||||||||||||   ${END}${RED}SOCKS.5-TORPROXY: ${END}\n||${BACK_GREEN}$ [(curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//')] ${END}${RED}||\n|||||||||||||||||||||| ${END} ${BACK_GREEN}[ $TOR_CHECK ]${END}" 
