@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 RED='\033[0;36m'
 BLUE='\033[0;35m'
 GREEN='\033[0;32m'
