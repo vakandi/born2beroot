@@ -49,7 +49,10 @@ echo "${BLUE}User log: ${END}${GREEN}$(w | awk '{print $1}' |sed '1,2d' | sort -
 
 if [ -z $TOR_CHECK ]
 then
-	echo "${BLUE}Network:${END}\n""${RED}|||||||||||||||||||||| ${END} ${RED}SOCKS.5-TORPROXY: ${END}\n${RED}||${END}${BACK_GREEN} [$(curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//')]${END} ${RED}||\n|||||||||||||||||||||| ${END} ${BACK_ORANGE}[ NOT CONNECTED]${END}" 
+	echo "${BLUE}Network:${END}\n""${RED}|||||||||||||||||||||| ${END} ${RED}SOCKS.5-TORPROXY: ${END}\n${RED}||${END}${BACK_GREEN} [$(curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//')]${END} ${RED}||\n|||||||||||||||||||||| ${END} ${BACK_ORANGE}[ NOT CONNECTED]${END}"
+	#for (( c=1; c<=100; c++ )); do; echo '\007'; sleep 0.01s; done
+	#Uncomment the line above to make an Ascii Beep Sound
+	#Compatible with linux, WSL and Android
 else
 	echo "${BLUE}Network:${END}\n""${RED}||||||||||||||||||||||   ${END}${RED}SOCKS.5-TORPROXY: ${END}\n||${BACK_GREEN}$ [(curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//')] ${END}${RED}||\n|||||||||||||||||||||| ${END} ${BACK_GREEN}[ $TOR_CHECK ]${END}" 
 fi
