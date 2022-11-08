@@ -28,7 +28,7 @@ echo "${BLUE}vCPU:${END}${GREEN}$(grep processor /proc/cpuinfo | sed 's#processo
 
 echo "${BLUE}Memory Usage: ${END}${GREEN}$(echo "($RAM_TOTAL-($RAM_TOTAL-$RAM_LEFT))"|bc) Mo/$RAM_TOTAL Mo $(echo "(100 *$RAM_LEFT/$RAM_TOTAL)"|bc)% ${END}"
 
-echo "${BLUE}Disk Usage:${END}${GREEN} $TOTAL_DISK_GIGA Go/$FREE_DISK_GIGA Go ($PERCENT_GIGA%)${END}" 
+echo "${BLUE}Disk Usage:${END}${GREEN} $FREE_DISK_GIGA Go/$TOTAL_DISK_GIGA Go ($PERCENT_GIGA%)${END}" 
 
 echo "${BLUE}${END}${GREEN}$(cat /proc/stat | grep cpu| tail -1|awk '{print ($5*100)/($2+$3+$4+$5+$6+$7+$8+$9+$10)}' | awk '{print "CPU Load: " 100-$1"%"}')${END}"
 
