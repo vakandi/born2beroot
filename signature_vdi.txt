@@ -1,2 +1,6 @@
 Hachage SHA1 de Kali.vbox :
 d0f6649bc6d8b1e16259266c758b5112d126c4b4
+
+Hachage SHA1 de Kali.vdi :
+86f6944ce25cea3977a6cb39699231404206507d
+CertUtil: -hashfile La commande s’est terminée correctement.
