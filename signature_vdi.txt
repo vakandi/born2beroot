@@ -1,3 +1,5 @@
+d4631e66e0f8fa87f2fedcef53a94a7a9c626de4
+
 Hachage SHA1 de Kali.vbox :
 d0f6649bc6d8b1e16259266c758b5112d126c4b4
 
