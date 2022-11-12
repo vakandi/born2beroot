@@ -1,12 +1,12 @@
-#!/bin/bash
-RED=''
-BLUE=''
-GREEN=''
-BACK_GREEN=''
-BACK_ORANGE=''
-PURPLE=''
-ORANGE=''
-END=''
+#!/bin/sh
+RED='\033[0;36m'
+BLUE='\033[0;35m'
+GREEN='\033[0;32m'
+BACK_GREEN='\033[0;42m'
+BACK_PURPLE='\033[0;45m'
+PURPLE='\033[0;35m'
+ORANGE='\033[0;33m'
+END='\033[0m'  
 RAM_AVAILABLE=$(free -m | awk '{print $7}' | sed '1d' | sed '2d')
 RAM_TOTAL=$(free -m | awk '{print $2}' | sed '1d' | sed '2d')
 RAM_LEFT=$(echo "($RAM_TOTAL-$RAM_AVAILABLE)"|bc)
@@ -61,8 +61,8 @@ if [ -z $TOR_CHECK ]
 then
 	echo "${BLUE}      Network:${END}            ${RED}SOCKS.5-TORPROXY: ${END}"
 	echo "${RED}||||||||||||||||||||||  |||||||||||||||||||||||${END}"
-	echo "${RED}||${END}${BACK_GREEN} [$(curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//')]${END} ||   || ${BACK_ORANGE}[ NOT CONNECTED ]${END} ||"
-	echo "${RED}|||||||||||||||||||||| ${END} |||||||||||||||||||||||" 
+	echo "${RED}|| ${END}${BACK_GREEN}[$(curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//')]${END} ${RED}||   ||${END} ${BACK_PURPLE}[ NOT CONNECTED ]${END} ${RED}||${END}"
+	echo "${RED}|||||||||||||||||||||| ${END}${RED} |||||||||||||||||||||||${END}" 
 else
 	echo "${BLUE}Network:${END}"
 	echo "${RED}||||||||||||||||||||| ${END} ${RED}SOCKS.5-TORPROXY: ${END}"
