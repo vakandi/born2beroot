@@ -13,6 +13,11 @@ RAM_LEFT=$(echo "($RAM_TOTAL-$RAM_AVAILABLE)"|bc)
 
 TOTAL_DISK_GIGA=$(echo "$(df -BG | awk '{print $2}' | sed '1d' | rev | cut -c2-| rev)" > giga.tmp && awk '{s+=$1} END {print s}' giga.tmp)
 FREE_DISK_GIGA=$( echo "$(df -BG | awk '{print $4}' | sed '1d' | rev | cut -c2-| rev  )" > giga.tmp && awk '{s+=$1} END {print s}' giga.tmp)
+
+
+REAL_FREE_DISK_GIGA=$( echo "$TOTAL_DISK_GIGA - $FREE_DISK_GIGA" |bc)
+
+
 PERCENT_GIGA=$(echo "(100 - (100*$FREE_DISK_GIGA/$TOTAL_DISK_GIGA))" |bc)
 LVM_CHECK="$(sudo lvscan | awk '{print $1}' | sed '1,6d')"
 NUM_TCP=$(ss -s | grep TCP | sed '1d' | cut -c7)
@@ -36,7 +41,7 @@ echo "${BLUE}vCPU:${END}${GREEN} $(grep processor /proc/cpuinfo | sed 's#process
 
 echo "${BLUE}Memory Usage: ${END}${GREEN}$(echo "($RAM_TOTAL-($RAM_TOTAL-$RAM_LEFT))"|bc) Mo/$RAM_TOTAL Mo $(echo "(100 *$RAM_LEFT/$RAM_TOTAL)"|bc)% ${END}"
 
-echo "${BLUE}Disk Usage:${END}${GREEN} $FREE_DISK_GIGA Go/$TOTAL_DISK_GIGA Go ($PERCENT_GIGA%)${END}" 
+echo "${BLUE}Disk Usage:${END}${GREEN} $REAL_FREE_DISK_GIGA Go/$TOTAL_DISK_GIGA Go ($PERCENT_GIGA%)${END}" 
 
 echo "${BLUE}CPU Load : ${END}${GREEN}$(echo "$CPU_LOAD1+$CPU_LOAD2+$CPU_LOAD3+$CPU_LOAD4+$CPU_LOAD5+$CPU_LOAD6+$CPU_LOAD7+$CPU_LOAD8+$CPU_LOAD9" |bc) %${END}"
 
