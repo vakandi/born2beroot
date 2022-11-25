@@ -1,14 +1,14 @@
 #!/bin/bash
 RED=''
 BLUE=''
-GREEN='\e[92m'
+GREEN=''
 BACK_GREEN=''
 BACK_ORANGE=''
 PURPLE=''
-YELLOW='\e[93m'
-BACK_BLUE='\e[1;44m'
+YELLOW=''
+BACK_BLUE=''
 ORANGE=''
-END='\e[0m'
+END=''
 
 
 RAM_AVAILABLE=$(free -m | awk '{print $7}' | sed '1d' | sed '2d')
@@ -37,56 +37,52 @@ CPU_LOAD8="$(mpstat | awk '{print $11}' | sed '1,3d')"
 CPU_LOAD9="$(mpstat | awk '{print $12}' | sed '1,3d')"
 
 
-printf "${BACK_BLUE}Architecture:${END} ${GREEN}$(uname -a)${END}"
+echo "${BACK_BLUE}Architecture:${END} ${GREEN}$(uname -a)${END}"
 
-printf "${BACK_BLUE}CPU Physical: ${END}${GREEN}$(lscpu | grep Architecture | wc -l)${END}"
+echo "${BACK_BLUE}CPU Physical: ${END}${GREEN}$(lscpu | grep Architecture | wc -l)${END}"
 
-printf "${BACK_LUE}vCPU:${END}${GREEN} $(grep processor /proc/cpuinfo | sed 's#processor##g' | cut -c3- | wc -l)${END}"
+echo "${BACK_LUE}vCPU:${END}${GREEN} $(grep processor /proc/cpuinfo | sed 's#processor##g' | cut -c3- | wc -l)${END}"
 
-printf "${BACK_BLUE}Memory Usage: ${END}${GREEN}$(echo "($RAM_TOTAL-($RAM_TOTAL-$RAM_LEFT))"|bc) Mo/$RAM_TOTAL Mo $(echo "(100 *$RAM_LEFT/$RAM_TOTAL)"|bc)% ${END}"
+echo "${BACK_BLUE}Memory Usage: ${END}${GREEN}$(echo "($RAM_TOTAL-($RAM_TOTAL-$RAM_LEFT))"|bc) Mo/$RAM_TOTAL Mo $(echo "(100 *$RAM_LEFT/$RAM_TOTAL)"|bc)% ${END}"
 
-<<<<<<< HEAD
 echo "${BLUE}Disk Usage:${END}${GREEN} $REAL_FREE_DISK_GIGA Go/$TOTAL_DISK_GIGA Go ($PERCENT_GIGA%)${END}" 
-=======
-printf "${BACK_BLUE}Disk Usage:${END}${GREEN} $FREE_DISK_GIGA Go/$TOTAL_DISK_GIGA Go ($PERCENT_GIGA%)${END}" 
->>>>>>> 86e9ca9 (update)
 
-printf "${BACK_BLUE}CPU Load : ${END}${GREEN}$(printf "$CPU_LOAD1+$CPU_LOAD2+$CPU_LOAD3+$CPU_LOAD4+$CPU_LOAD5+$CPU_LOAD6+$CPU_LOAD7+$CPU_LOAD8+$CPU_LOAD9" |bc) %${END}"
+echo "${BACK_BLUE}CPU Load : ${END}${GREEN}$(echo "$CPU_LOAD1+$CPU_LOAD2+$CPU_LOAD3+$CPU_LOAD4+$CPU_LOAD5+$CPU_LOAD6+$CPU_LOAD7+$CPU_LOAD8+$CPU_LOAD9" |bc) %${END}"
 
 
 
-printf "${BACK_BLUE}Last Boot:${END}${GREEN} $(last reboot |less| head -n1 | cut -c40-56)${END}"
+echo "${BACK_BLUE}Last Boot:${END}${GREEN} $(last reboot |less| head -n1 | cut -c40-56)${END}"
 
 if [ $LVM_CHECK = "ACTIVE" ]
 then
-	printf "${BACK_BLUE}LVM use: ${END}${GREEN}yes${END} "
+	echo "${BACK_BLUE}LVM use: ${END}${GREEN}yes${END} "
 else
-	printf "${BACK_BLUE}LVM use: ${END}${GREEN}no${END} "
+	echo "${BACK_BLUE}LVM use: ${END}${GREEN}no${END} "
 fi
 NUM_TCP=$(ss -s | grep TCP | sed '1d' | cut -c7)
 
-printf "${BACK_BLUE}Connections TCP : ${END}${GREEN}$NUM_TCP${END} ${BLUE} ESTABLISHED${END} "
+echo "${BACK_BLUE}Connections TCP : ${END}${GREEN}$NUM_TCP${END} ${BLUE} ESTABLISHED${END} "
 
-printf "${BACK_BLUE}User log: ${END}${GREEN}$(w | awk '{print $1}' |sed '1,2d' | sort -u | wc -l)${END} "
+echo "${BACK_BLUE}User log: ${END}${GREEN}$(w | awk '{print $1}' |sed '1,2d' | sort -u | wc -l)${END} "
 
 
 if [ -z $TOR_CHECK ]
 then
-	printf "${BACK_BLUE}      Network:${END}            ${RED}SOCKS.5-TORPROXY: ${END}"
-	printf "${RED}||||||||||||||||||||||  |||||||||||||||||||||||${END}"
-	printf "${RED}||${END}${BACK_GREEN} [$(curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//')]${END} ||   || ${BACK_ORANGE}[ NOT CONNECTED ]${END} ||"
-	printf "${RED}|||||||||||||||||||||| ${END} |||||||||||||||||||||||" 
+	echo "${BACK_BLUE}      Network:${END}            ${RED}SOCKS.5-TORPROXY: ${END}"
+	echo "${RED}||||||||||||||||||||||  |||||||||||||||||||||||${END}"
+	echo "${RED}||${END}${BACK_GREEN} [$(curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//')]${END} ||   || ${BACK_ORANGE}[ NOT CONNECTED ]${END} ||"
+	echo "${RED}|||||||||||||||||||||| ${END} |||||||||||||||||||||||" 
 else
-	printf "${BLUE}Network:${END}"
-	printf "${RED}||||||||||||||||||||| ${END} ${RED}SOCKS.5-TORPROXY: ${END}"
-	printf "${RED}||${END}${BACK_GREEN} [$(curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//')]${END} ||"
-	printf "${RED}||||||||||||||||||||| ${END} ${BACK_GREEN}[ $TOR_CHECK ]${END}" 
+	echo "${BLUE}Network:${END}"
+	echo "${RED}||||||||||||||||||||| ${END} ${RED}SOCKS.5-TORPROXY: ${END}"
+	echo "${RED}||${END}${BACK_GREEN} [$(curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//')]${END} ||"
+	echo "${RED}||||||||||||||||||||| ${END} ${BACK_GREEN}[ $TOR_CHECK ]${END}" 
 fi
 
 
-printf "${BLUE}MAC Address of the current internet connection(s):${END}  ${GREEN}$(sudo ifconfig | grep ether |cut -c15- | awk '{print $1}')${END}"
+echo "${BLUE}MAC Address of the current internet connection(s):${END}  ${GREEN}$(sudo ifconfig | grep ether |cut -c15- | awk '{print $1}')${END}"
 
-printf "${BLUE}Sudo : ${END}${GREEN}$(sudo cat /var/log/sudo/sudo.log | grep COMMAND | awk '{print NR}' | awk 'END { print }') cmd${END}"
+echo "${BLUE}Sudo : ${END}${GREEN}$(sudo cat /var/log/sudo/sudo.log | grep COMMAND | awk '{print NR}' | awk 'END { print }') cmd${END}"
 rm giga.tmp
 
 

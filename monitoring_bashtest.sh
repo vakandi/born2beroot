@@ -45,11 +45,8 @@ printf "${BACK_LUE}vCPU:${END}${GREEN} $(grep processor /proc/cpuinfo | sed 's#p
 
 printf "${BACK_BLUE}Memory Usage: ${END}${GREEN}$(echo "($RAM_TOTAL-($RAM_TOTAL-$RAM_LEFT))"|bc) Mo/$RAM_TOTAL Mo $(echo "(100 *$RAM_LEFT/$RAM_TOTAL)"|bc)% ${END}"
 
-<<<<<<< HEAD
 echo "${BLUE}Disk Usage:${END}${GREEN} $REAL_FREE_DISK_GIGA Go/$TOTAL_DISK_GIGA Go ($PERCENT_GIGA%)${END}" 
-=======
 printf "${BACK_BLUE}Disk Usage:${END}${GREEN} $FREE_DISK_GIGA Go/$TOTAL_DISK_GIGA Go ($PERCENT_GIGA%)${END}" 
->>>>>>> 86e9ca9 (update)
 
 printf "${BACK_BLUE}CPU Load : ${END}${GREEN}$(printf "$CPU_LOAD1+$CPU_LOAD2+$CPU_LOAD3+$CPU_LOAD4+$CPU_LOAD5+$CPU_LOAD6+$CPU_LOAD7+$CPU_LOAD8+$CPU_LOAD9" |bc) %${END}"
 
