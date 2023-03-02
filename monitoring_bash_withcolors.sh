@@ -79,11 +79,13 @@ do
 	
 	
 	echo -e "${BLUE}Sudo : ${END}${GREEN}$(sudo cat /var/log/sudo/sudo.log | grep COMMAND | awk '{print NR}' | awk 'END { print }') cmd${END}"
-	varr=7
-	varr=$((varr+$(sudo ifconfig | grep ether |cut -c15- | awk '{print $1}' | wc -l)))
-	sleep 4s
+	#7 output lines from my script + mac address to add
+	number_of_lines_to_clear=7
+	#Adding the mac  address to equal to one line each
+	number_of_lines_to_clear=$((number_of_lines_to_clear+$(sudo ifconfig | grep ether |cut -c15- | awk '{print $1}' | wc -l)))
+	sleep 7s
 	clear_loop=1
-	while [ $clear_loop -le $varr ]
+	while [ $clear_loop -le $number_of_lines_to_clear ]
 	do
 		echo -ne "\033[1A\033[2K\r"
 		clear_loop=$((clear_loop+1))
