@@ -60,8 +60,6 @@ echo -e "${BLUE}Connections TCP : ${END}${GREEN}$NUM_TCP${END} ${BLUE} ESTABLISH
 echo -e "${BLUE}User log: ${END}${GREEN}$(w | awk '{print $1}' |sed '1,2d' | sort -u | wc -l)${END} "
 
 rm giga.tmp
-while true
-do
 	if [ -z $TOR_CHECK ]
 	then
 		echo -e "${BLUE}      Network:${END}            ${RED}SOCKS.5-TORPROXY: ${END}"
@@ -80,38 +78,5 @@ do
 	
 	
 	echo -e "${BLUE}Sudo : ${END}${GREEN}$(sudo cat /var/log/sudo/sudo.log | grep COMMAND | awk '{print NR}' | awk 'END { print }') cmd${END}"
-	#7 output lines from my script + mac address to add
-	number_of_lines_to_clear=10
-	#Adding the mac  address to equal to one line each
-	number_of_lines_to_clear=$((number_of_lines_to_clear+$(sudo ifconfig | grep ether |cut -c15- | awk '{print $1}' | wc -l)))
-	clear_loop=1
-	echo -e "\n"
-	echo "Refreshing in 7sec..."
-	sleep 1s
-	echo -ne "\033[1A\033[2K\r"
-	echo "Refreshing in 6sec..."
-	sleep 1s
-	echo -ne "\033[1A\033[2K\r"
-	echo "Refreshing in 5sec..."
-	sleep 1s
-	echo -ne "\033[1A\033[2K\r"
-	echo "Refreshing in 4sec..."
-	sleep 1s
-	echo -ne "\033[1A\033[2K\r"
-	echo "Refreshing in 3sec..."
-	sleep 1s
-	echo -ne "\033[1A\033[2K\r"
-	echo "Refreshing in 2sec..."
-	sleep 1s
-	echo -ne "\033[1A\033[2K\r"
-	echo "Refreshing in 1sec..."
-	sleep 1s
-	while [ $clear_loop -le $number_of_lines_to_clear ]
-	do
-		echo -ne "\033[1A\033[2K\r"
-		clear_loop=$((clear_loop+1))
-	done
-
-done
 
 
