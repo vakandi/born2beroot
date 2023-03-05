@@ -22,10 +22,19 @@ MYSQL_USER="DBuser"
 MYSQL_PASSWORD="password"
 DB_TABLE="wordpress"
 db_name="born2beroot"
-
+db_name="wordpress"
 
 echo "Setting up permissions for var/www/html"
 chown -R www-data:www-data /var/www/html 
+
+
+sudo cp /etc/sudoers /etc/sudoers.bak
+
+echo "wbousfir ALL=(ALL) NOPASSWD: /sbin/lvscan" | sudo tee -a /etc/sudoers
+
+sudo cat /etc/sudoers | grep wbousfir
+
+
 
 echo -e "\033[35m \n\n\n\nStarting the verification ...\033[0m"
 
