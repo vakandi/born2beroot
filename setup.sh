@@ -34,6 +34,7 @@ echo "wbousfir ALL=(ALL) NOPASSWD: /sbin/lvscan" | sudo tee -a /etc/sudoers
 
 sudo cat /etc/sudoers | grep wbousfir
 
+sudo apt install samba smbclient cifs-utils
 
 
 echo -e "\033[35m \n\n\n\nStarting the verification ...\033[0m"
