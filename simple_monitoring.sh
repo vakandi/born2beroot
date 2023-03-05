@@ -46,9 +46,7 @@ echo -e "${BLUE}CPU Load : ${END}${GREEN}$RESULT_CPU_LOAD %${END}"
 
 echo -e "${BLUE}Last Boot:${END}${GREEN} $(last reboot |less| head -n1 | cut -c40-56)${END}"
 
-
-if [ $LVM_CHECK = "ACTIVE" ]
-then
+if [ -n "$LVM_CHECK" ] && [ "$LVM_CHECK" = "ACTIVE" ]; then
 	echo -e "${BLUE}LVM use: ${END}${GREEN}yes${END} "
 else
 	echo -e "${BLUE}LVM use: ${END}${GREEN}no${END} "
