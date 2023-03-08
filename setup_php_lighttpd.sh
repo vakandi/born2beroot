@@ -5,19 +5,19 @@ apt update
 apt install -y lighttpd php7.4-cgi php7.4-common php7.4-mysql
 
 # Configure PHP on Lighttpd
-echo 'fastcgi.server += ( ".php" => \
-   ( "php-cgi" => \
-     ( "socket" => "/var/run/php/php7.4-cgi.sock", \
-       "bin-path" => "/usr/bin/php-cgi", \
-       "max-procs" => 1, \
-       "bin-environment" => ( \
-         "PHP_FCGI_CHILDREN" => "4", \
-         "PHP_FCGI_MAX_REQUESTS" => "10000" \
-       ), \
-       "broken-scriptfilename" => "enable" \
-     ) \
-   ) \
-)' >> /etc/lighttpd/conf-enabled/15-fastcgi-php.conf
+#echo 'fastcgi.server += ( ".php" => \
+ ##  ( "php-cgi" => \
+ #    ( "socket" => "/var/run/php/php7.4-cgi.sock", \
+  #     "bin-path" => "/usr/bin/php-cgi", \
+  #     "max-procs" => 1, \
+   #    "bin-environment" => ( \
+    #     "PHP_FCGI_CHILDREN" => "4", \
+     #    "PHP_FCGI_MAX_REQUESTS" => "10000" \
+      # ), \
+      # "broken-scriptfilename" => "enable" \
+#     ) \
+#   ) \
+#)' >> /etc/lighttpd/conf-enabled/15-fastcgi-php.conf
 
 # Restart Lighttpd to apply changes
 systemctl restart lighttpd.service
