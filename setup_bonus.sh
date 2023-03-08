@@ -10,24 +10,23 @@ echo "workgroup = WORKGROUP" >> /etc/samba/smb.conf
 sudo mkdir /public
 sudo mkdir /private
 
-echo "[public]
-   comment = Public Folder
-   path = /public
-   writable = yes
-   guest ok = yes
-   guest only = yes
-   force create mode = 775
-   force directory mode = 775
-[private]
-   comment = Private Folder
-   path = /private
-   writable = yes
-   guest ok = no
-   valid users = @smbshare
-   force create mode = 770
-   force directory mode = 770
-   inherit permissions = yes
-" >> /etc/samba/smb.conf
+echo "[public]" >> /etc/samba/smb.conf
+echo "   comment = Public Folder" >> /etc/samba/smb.conf
+echo "   path = /public" >> /etc/samba/smb.conf
+echo "   writable = yes" >> /etc/samba/smb.conf
+echo "   guest ok = yes" >> /etc/samba/smb.conf
+echo "   guest only = yes" >> /etc/samba/smb.conf
+echo "   force create mode = 775" >> /etc/samba/smb.conf
+echo "   force directory mode = 775" >> /etc/samba/smb.conf
+echo "[private]" >> /etc/samba/smb.conf
+echo "   comment = Private Folder" >> /etc/samba/smb.conf
+echo "   path = /private" >> /etc/samba/smb.conf
+echo "   writable = yes" >> /etc/samba/smb.conf
+echo "  guest ok = no" >> /etc/samba/smb.conf
+echo "  valid users = @smbshare" >> /etc/samba/smb.conf   
+echo "  force create mode = 770" >> /etc/samba/smb.conf   
+echo "  force directory mode = 770" >> /etc/samba/smb.conf
+echo "  inherit permissions = yes" >> /etc/samba/smb.conf
 
 
 
