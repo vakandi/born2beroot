@@ -20,5 +20,10 @@ echo 'fastcgi.server += ( ".php" => \
 )' >> /etc/lighttpd/conf-enabled/15-fastcgi-php.conf
 
 # Restart Lighttpd to apply changes
-systemctl restart lighttpd
+systemctl restart lighttpd.service
+#!/bin/bash
 
+echo "<?php phpinfo(); ?>" > /var/www/html/info.php
+echo "<?php phpinfo(); ?>" > /var/www/info.php
+
+echo "PHP has been installed and configured on lighttpd."
