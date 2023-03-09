@@ -75,6 +75,8 @@ echo -e "${BLUE}Connections TCP : ${END}${GREEN}$NUM_TCP${END} ${BLUE} ESTABLISH
 
 echo -e "${BLUE}User log: ${END}${GREEN}$(w | awk '{print $1}' |sed '1,2d' | sort -u | wc -l)${END} "
 
+echo -e "${BLUE}Local IP: ${END}${GREEN}$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}')${END} "
+
 rm giga.tmp
 	if [ -z $TOR_CHECK ]
 	then

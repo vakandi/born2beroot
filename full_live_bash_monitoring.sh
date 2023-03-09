@@ -49,25 +49,22 @@ echo -e "${BLUE}Last Boot:${END}${GREEN} $(last reboot |less| head -n1 | cut -c4
 
 lvm_enabled=0
 
-# Check if the lvm2 package is installed
+# Checkking if the lvm2 is installed
+#It checks if the lvm2 package is installed on the system. LVM relies on this package to provide the dmsetup tool, which is used to manage LVM logical volumes.
 if dpkg-query -W lvm2 > /dev/null 2>&1; then
-    # Check if the dm-mod kernel module is loaded
+    # Checkking if the dm-mod kernel module is loaded
+    #LVM uses the device mapper kernel subsystem to manage logical volumes, and the dm-mod module is necessary for this subsystem to function.
     if lsmod | grep -q "^dm_mod "; then
         lvm_enabled=1
     fi
 fi
 
+#If both of these conditions are met, the script outputs "LVM is enabled on this system." Otherwise, it outputs "LVM is not enabled on this system."
 if [[ $lvm_enabled -eq 1 ]]; then
     echo -e "${BLUE}LVM use: ${END}${GREEN}yes${END}"
 else
     echo -e "${BLUE}LVM use: ${END}${GREEN}no${END}"
 fi
-
-#This script checks if LVM is enabled on the system by checking two conditions:
-
-#It checks if the lvm2 package is installed on the system. LVM relies on this package to provide the dmsetup tool, which is used to manage LVM logical volumes.
-#It checks if the dm-mod kernel module is loaded. LVM uses the device mapper kernel subsystem to manage logical volumes, and the dm-mod module is necessary for this subsystem to function.
-#If both of these conditions are met, the script outputs "LVM is enabled on this system." Otherwise, it outputs "LVM is not enabled on this system."
 
 
 
@@ -75,6 +72,8 @@ fi
 echo -e "${BLUE}Connections TCP : ${END}${GREEN}$NUM_TCP${END} ${BLUE} ESTABLISHED${END} "
 
 echo -e "${BLUE}User log: ${END}${GREEN}$(w | awk '{print $1}' |sed '1,2d' | sort -u | wc -l)${END} "
+echo -e "${BLUE}Local IP: ${END}${GREEN}$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}')${END} "
+
 
 rm giga.tmp
 while true
@@ -130,5 +129,4 @@ do
 	done
 
 done
-
 
