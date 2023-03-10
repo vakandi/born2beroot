@@ -1,5 +1,5 @@
 #!/bin/bash
-
+apt install mariadb-client mariadb-client php7.4
 cd /var/www/html
 
 mkdir -p /var/www/html/
