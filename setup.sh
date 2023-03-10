@@ -24,6 +24,9 @@ DB_TABLE="wordpress"
 db_name="born2beroot"
 db_name="wordpress"
 
+
+#echo "$(cat /etc/lighttpd/lighttpd.conf | sed "s#var/www##g")" > /etc/lighttpd/lighttpd.conf
+
 echo "Setting up permissions for var/www/html"
 chown -R www-data:www-data /var/www/html 
 
